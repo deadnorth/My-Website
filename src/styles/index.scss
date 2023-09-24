@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Outfit:wght@500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+	html,
+	body {
+		@apply bg-black;
+	}
+
+	html {
+		@apply overflow-x-hidden overflow-y-scroll;
+		-webkit-tap-highlight-color: transparent;
+		scrollbar-color: #fff2 #000;
+		scrollbar-width: thin;
+	}
+
+	*:focus-visible {
+		outline: 2px solid white;
+		outline-offset: 4px;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: black;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #ffffff22;
+	}
+	::-webkit-scrollbar-button {
+		display: none;
+	}
+	::-webkit-scrollbar-corner {
+		display: none;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #ffffff18;
+	}
+	::-webkit-scrollbar-thumb:active {
+		background: #ffffff10;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			animation-delay: -1ms !important;
+			animation-duration: 1ms !important;
+			animation-iteration-count: 1 !important;
+			background-attachment: initial !important;
+			scroll-behavior: auto !important;
+			transition-duration: 0s !important;
+			transition-delay: 0s !important;
+		}
+	}
+
+	.fade-out {
+		animation-name: fade-out;
+		animation-duration: 0.2s;
+		animation-fill-mode: both;
+		animation-timing-function: cubic-bezier(0.17, 0.64, 0.59, 0.96);
+	}
+
+	.fade-in > * {
+		animation-name: fade-in;
+		animation-duration: 0.3s;
+		animation-fill-mode: both;
+		animation-timing-function: cubic-bezier(0.14, 0.64, 0.51, 0.94);
+	}
+
+	@for $i from 1 through 24 {
+		.fade-in > :nth-child(#{$i}) {
+			animation-delay: #{$i / 20}s;
+		}
+	}
+
+	@keyframes fade-out {
+		from {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		to {
+			opacity: 0;
+			transform: translateY(0.5rem);
+		}
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.5rem);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+@layer components {
+	.heading {
+		@apply flex items-center font-heading font-extrabold text-6xl tracking-tighter;
+	}
+}
+
+@layer utilities {
+	.no-scrollbar {
+		scrollbar-width: none;
+	}
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+}
